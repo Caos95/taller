@@ -31,14 +31,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Rut</th>
                         <th>Usuario</th>
                         <th>Nombre</th>
-                        <th>Rut</th>
-                        <th>Email</th>
-                        <th>Sexo</th>
                         <th>Especialidad</th>
-                        <th>Telefono</th>
-                        <th>Taller</th>
                         <th>Estado</th>
                         <th>Acci&oacute;n</th>
                     </tr>
