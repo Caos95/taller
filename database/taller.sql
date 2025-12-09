@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-12-2025 a las 00:21:06
+-- Tiempo de generación: 09-12-2025 a las 22:12:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -239,6 +239,13 @@ CREATE TABLE `dueno_taller` (
   `id_dueno_taller` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `dueno_taller`
+--
+
+INSERT INTO `dueno_taller` (`id_dueno_taller`) VALUES
+(3);
+
 -- --------------------------------------------------------
 
 --
@@ -345,7 +352,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `clave`, `fecha_de_creacion`, `estado`, `nombres`, `apellidos`, `rut`, `email`, `telefono`, `sexo`, `rol_id_rol`) VALUES
 (1, 'acartes4', '$2y$10$RWNK5OBmX1iXpCpvYODHVeaAQHU/KHkL4TCl5n9s9mkNmEr2SlHWK', '2025-12-01 10:20:00', 1, 'Ariel Alexander', 'Cartes Burgos', '18978569-0', 'acartes4@gmail.com', '964279810', 'M', 1),
-(2, 'm.burgos1', '$2y$10$mHPQeve6/eysLYUlr50imu/Qv7.R0E6ci2elc6nuSW4clmMytjFEu', '2025-12-04 17:58:25', 1, 'Marta Iris', 'Burgos Muñoz', '5915750-4', 'm.burgos1@gmail.com', '964279810', 'F', 2);
+(2, 'm.burgos1', '$2y$10$SXiEagZx/UUn41EY8Yf5aea28Dae16mGuUmSFvt1m41BcB6qoZt52', '2025-12-04 17:58:25', 1, 'Marta Iris', 'Burgos Muñoz', '5915750-4', 'm.burgos1@gmail.com', '964279810', 'F', 2),
+(3, 'm.muñoz1', '$2y$10$KmTMb2T4so.vA0t7cUcR0OBYLn0B7RXzzB2kQCzgD/2PCxjp5G9Sy', '2025-12-09 15:01:23', 1, 'Matias Alexis', 'Muñoz Lozano', '18965847-5', 'm.muñoz1@gmail.com', '965626387', 'M', 4);
 
 -- --------------------------------------------------------
 
@@ -476,7 +484,7 @@ ALTER TABLE `taller`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculo`
