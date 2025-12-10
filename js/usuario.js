@@ -95,6 +95,7 @@ function listar_usuario(){
            {"data":"rut"},
            {"data":"nombre_usuario"},
            {"data":"nombre_completo"},
+           {"data":"rol_nombre"},
            {
              "data":"estado",
              render: function (data, type, row ) { // El estado ya funciona con 1 y 0 (TINYINT)
@@ -105,7 +106,7 @@ function listar_usuario(){
                }
              }
            },
-           {"data":"rol_nombre"},
+
            {"defaultContent": "",
             render: function (data, type, row ) {
                 let status_button;
