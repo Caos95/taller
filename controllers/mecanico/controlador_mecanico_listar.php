@@ -1,8 +1,8 @@
 <?php
 require "../../models/modelo_mecanico.php";
 header('content-type:application/json');
-$ME = new Modelo_Mecanico();
-$consulta = $ME->listar_mecanico();
+$MM = new Modelo_Mecanico();
+$consulta = $MM->listar_mecanico();
 
 $data = $consulta ? $consulta : [];
 
