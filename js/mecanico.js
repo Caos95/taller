@@ -27,6 +27,7 @@ function listar_mecanico(){
                     }else{
                         return "<span class='label label-danger'>INACTIVO</span>";
                     }
+                    
                 }
             },
             {"defaultContent":"",
@@ -35,10 +36,13 @@ function listar_mecanico(){
                     if(status_button=='1'){
                         status_button="<button style='font-size:13px;' type='button' class='status btn btn-danger'><i class='fa fa-times'></i></button>";
                     }else{
-                        status_button="<button style='font-size:13px;' type='button' class='status btn btn-success'><i class='fa fa-check'>"
+                        status_button="<button style='font-size:13px;' type='button' class='status btn btn-success'><i class='fa fa-check'></i></button>";
                     }
+                    return "<button style='font-size:13px;' type='button' class='editar btn btn-primary'><i class='fa fa-edit'></i></button>&nbsp;" + status_button;
                 }
             }
-        ]
-    })
+        ],
+        "language":idioma_espanol,
+        select: true
+    });
 }
