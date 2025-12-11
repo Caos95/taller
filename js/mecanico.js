@@ -45,4 +45,32 @@ function listar_mecanico(){
         "language":idioma_espanol,
         select: true
     });
+
+    document.getElementById("tabla_m_filter").style.display="none";
+    $("tabla_m_filter").hide();
+    $('input.global_filter').on( 'keyup click', function () {
+        filterGlobal();
+    } );
+    $('input.column_filter').on( 'keyup click', function () {
+        filterColumn( $(this).parents('tr').attr('data-column') );
+    });
+
+    table.on('draw.dt', function () {
+        var PageInfo = $('#tabla_m').DataTable().page.info();
+        table.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + PageInfo.start;
+        });
+    });
 }
+    function filterGlobal() {
+        $('#tabla_m').DataTable().search(
+            $('#global_filter').val(),
+        ).draw();
+    }
+    
+    function AbrirModalRegistro(){
+        $("#modal_registro").modal({backdrop:'static',keyboard:false})
+        $("#modal_registro").modal('show');
+        $("#txt_usu").val("");
+        $("#txt_rut").val("");
+    }
