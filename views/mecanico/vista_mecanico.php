@@ -47,57 +47,57 @@
 </div>
 <form autocomplete="false" onsubmit="return false">
     <div class="modal fade" id="modal_registro" role="dialog">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title"><b>Registro De Usuario</b></h4>
                 </div>
                 <div class="modal-body">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Usuario</label>
                         <input type="text" class="form-control" id="txr_usu" placeholder="Ingrese usuario"><br>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Rut</label>
                         <input type="text" class="form-control" id="txr_rut" placeholder="Ingrese usuario"><br>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Nombre</label>
                         <input type="text" class="form-control" id="txr_nombre" placeholder="Ingrese usuario"><br>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Email</label>
                         <input type="text" class="form-control" id="txr_email" placeholder="Ingrese email">
                         <label for="" id="emailOK" style="color:red;"></label>
                         <input type="text" id="validar_email" hidden>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Especialidad</label>
                         <input type="text" class="form-control" id="txr_especialidad" placeholder="Ingrese usuario"><br>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Telefono</label>
                         <input type="text" class="form-control" id="txr_telefono" placeholder="Ingrese usuario"><br>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Contrase&ntilde;a</label>
                         <input type="password" class="form-control" id="txr_con1"
                             placeholder="Ingrese contrase&ntilde;a"><br>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Repita la Contrase&ntilde;a</label>
                         <input type="password" class="form-control" id="txr_con2"
                             placeholder="Repita contrase&ntilde;a"><br>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Sexo</label>
                         <select class="js-example-basic-single" name="state" id="cbm_sexo" style="width:100%;">
                             <option value="M">MASCULINO</option>
                             <option value="F">FEMENINO</option>
                         </select><br><br>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <label for="">Taller</label>
                         <select class="js-example-basic-single" name="state" id="cmb_taller" style="width:100%;">
                         </select><br><br>

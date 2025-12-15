@@ -34,8 +34,8 @@
                         <th>Rut</th>
                         <th>Usuario</th>
                         <th>Nombre</th>
-                        <th>Estado</th>
                         <th>Rol</th>
+                        <th>Estado</th>
                         <th>Acci&oacute;n</th>
                     </tr>
                 </thead>

@@ -1,15 +1,15 @@
 var tablemec;
 function listar_mecanico(){
-    tablemec=$("tabla_m").DataTable({
+    tablemec=$("#tabla_m").DataTable({
         "ordering":false,
         "bLengthChange":false,
         "searching": { "regex": false },
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
         "pageLength": 10,
         "destroy":true,
-        "processing": true,
+        "processing": true, // Es "processing", no "proccesing"
         "ajax":{
-            "url":"../controlers/mecanico/controlador_mecanico_listar.php",
+            "url":"../controllers/mecanico/controlador_mecanico_listar.php",
             type:'POST'
         },
         "order":[[1,'asc']],
@@ -32,8 +32,8 @@ function listar_mecanico(){
             },
             {"defaultContent":"",
                 render: function (data, type, row){
-                    let status_button;
-                    if(status_button=='1'){
+                    let status_button; // La variable a evaluar es row.estado
+                    if(row.estado=='1'){
                         status_button="<button style='font-size:13px;' type='button' class='status btn btn-danger'><i class='fa fa-times'></i></button>";
                     }else{
                         status_button="<button style='font-size:13px;' type='button' class='status btn btn-success'><i class='fa fa-check'></i></button>";
@@ -46,18 +46,19 @@ function listar_mecanico(){
         select: true
     });
 
-    document.getElementById("tabla_m_filter").style.display="none";
-    $("tabla_m_filter").hide();
+    // Usamos jQuery para ocultar el filtro, es más seguro y consistente.
+    // El ID correcto es "#tabla_m_filter"
+    $("#tabla_m_filter").hide();
     $('input.global_filter').on( 'keyup click', function () {
         filterGlobal();
     } );
     $('input.column_filter').on( 'keyup click', function () {
         filterColumn( $(this).parents('tr').attr('data-column') );
     });
-
-    table.on('draw.dt', function () {
+    // La variable de la tabla es tablemec, no table
+    tablemec.on('draw.dt', function () {
         var PageInfo = $('#tabla_m').DataTable().page.info();
-        table.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+        tablemec.column(0, { page: 'current' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1 + PageInfo.start;
         });
     });
