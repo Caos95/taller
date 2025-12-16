@@ -51,7 +51,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><b>Registro De Usuario</b></h4>
+                    <h4 class="modal-title"><b>Registro De Mecanico</b></h4>
                 </div>
                 <div class="modal-body">
                     <div class="col-lg-6">
