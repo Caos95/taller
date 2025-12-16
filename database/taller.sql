@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2025 a las 22:12:11
+-- Tiempo de generación: 16-12-2025 a las 20:43:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -58,6 +58,47 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_COMBO_ROL` ()   BEGIN
     nombre_rol,
     estado FROM rol 
     WHERE estado = 1 and nombre_rol != 'mecanico';
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_MECANICO` ()   BEGIN 
+    SELECT 
+        u.id_usuario,
+        u.nombre_usuario,
+        CONCAT(u.nombres, ' ', u.apellidos) AS nombre_completo,
+        u.rut,
+        u.email,
+        u.sexo,
+        u.estado,
+        r.nombre_rol AS rol_nombre,
+        m.especialidad,
+        t.nombre_taller
+    FROM 
+        usuario AS u
+    INNER JOIN 
+        rol AS r ON u.rol_id_rol = r.id_rol
+    INNER JOIN
+        mecanico AS m ON u.id_usuario = m.id_mecanico
+    INNER JOIN 
+        taller AS t ON m.taller_id_taller = t.id_taller
+    WHERE
+        r.nombre_rol = 'Mecanico'; 
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_TALLER` ()   begin 
+select * from taller;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_TALLERPrueba` ()   BEGIN
+    SELECT
+        t.id_taller,
+        t.nombre_taller,
+        t.direccion_taller,
+        t.email,
+        t.telefono,
+        CONCAT(u.nombres, ' ', u.apellidos) AS nombre_dueno
+    FROM taller AS t
+    INNER JOIN dueno_taller AS dt ON t.dueno_taller_id_dueno_taller = dt.id_dueno_taller
+    INNER JOIN usuario AS u ON dt.id_dueno_taller = u.id_usuario;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_USUARIO` ()   BEGIN
@@ -325,6 +366,13 @@ CREATE TABLE `taller` (
   `dueno_taller_id_dueno_taller` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `taller`
+--
+
+INSERT INTO `taller` (`id_taller`, `nombre_taller`, `direccion_taller`, `email`, `telefono`, `dueno_taller_id_dueno_taller`) VALUES
+(1, 'Sanpeter', 'las portulacas 62', 'sanpeter@gmail.com', '965636261', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -478,7 +526,7 @@ ALTER TABLE `servicio`
 -- AUTO_INCREMENT de la tabla `taller`
 --
 ALTER TABLE `taller`
-  MODIFY `id_taller` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_taller` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
