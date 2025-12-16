@@ -17,7 +17,7 @@ class modelo_Mecanico
 
     public function listar_mecanico()
     {
-        $sql = "CALL SP_LISTAR_MECANICO";
+        $sql = "CALL SP_LISTAR_MECANICO()";
         $stmt = $this->conexion->conexion->prepare($sql);
         if ($stmt === false) {
             return [];
