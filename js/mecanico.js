@@ -75,6 +75,7 @@ function listar_mecanico(){
         $("#txt_usu").val("");
         $("#txt_rut").val("");
     }
+    
 function listar_combo_taller(){
     $.ajax({
         url: "../controllers/taller/controlador_listar_taller.php",
@@ -86,11 +87,11 @@ function listar_combo_taller(){
             for (var i = 0; i < resp.length; i++){
                 cadena += "<option value='" + resp[i].id_taller + "'>" + resp[i].nombre_taller + "</option>";
             }
-            $("#cbm_taller").html(cadena);
+            $("#cmb_taller").html(cadena);
             $("#cbm_taller_editar").html(cadena);
         }else{
             cadena+="<option value=''>NO SE ENCONTRARON REGISTROS</option>";
-            $("#cbm_taller").html(cadena);
+            $("#cmb_taller").html(cadena);
             $("#cbm_taller_editar").html(cadena);
         }
     }).fail(function(jqXHR, textStatus, errorThrown){
