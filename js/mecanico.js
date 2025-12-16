@@ -75,3 +75,25 @@ function listar_mecanico(){
         $("#txt_usu").val("");
         $("#txt_rut").val("");
     }
+function listar_combo_taller(){
+    $.ajax({
+        url: "../controllers/taller/controlador_listar_taller.php",
+        type: 'POST',
+        dataType: 'json'
+    }).done(function (resp) {
+        var cadena = "";
+        if(resp && resp.length > 0){
+            for (var i = 0; i < resp.length; i++){
+                cadena += "<option value='" + resp[i].id_taller + "'>" + resp[i].nombre_taller + "</option>";
+            }
+            $("#cbm_taller").html(cadena);
+            $("#cbm_taller_editar").html(cadena);
+        }else{
+            cadena+="<option value=''>NO SE ENCONTRARON REGISTROS</option>";
+            $("#cbm_taller").html(cadena);
+            $("#cbm_taller_editar").html(cadena);
+        }
+    }).fail(function(jqXHR, textStatus, errorThrown){
+        console.error("Error al cargar talleres: ", textStatus, errorThrown, jqXHR.responseText);
+    })
+}
