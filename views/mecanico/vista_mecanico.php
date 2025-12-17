@@ -106,7 +106,11 @@
                         <select class="js-example-basic-single" name="state" id="cmb_taller" style="width:100%;">
                         </select><br><br>
                     </div>
-
+                    <div class="col-lg-6">
+                        <label for="">Rol</label>
+                        <select class="js-example-basic-single" name="state" id="cmb_rol" style="width:100%;">
+                        </select><br><br>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" onclick="registrar_Mecanico()"><i
@@ -124,6 +128,7 @@ $(document).ready(function () {
         listar_mecanico();
         $('.js-example-basic-single').select2();
         listar_combo_taller();
+        listar_combo_mecanico();
         $("#modal_registro").on('shown.bs.modal', function () {
             $("#txr_usu").focus();
         })
