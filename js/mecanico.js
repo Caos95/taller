@@ -110,9 +110,30 @@ function registrar_Mecanico(){
     var contra2 = $("#txr_con2").val();
     var sexo = $("#cbm_sexo").val();
     var taller = $("#cmb_taller").val();
+    var rol = $("#cmb_rol").val();
     var estado = "1";
 }
 
 function listar_combo_mecanico(){
-    
+    $.ajax({
+        url:"../controllers/mecanico/controlador_combo_mecanico.php",
+        type:'POST',
+        dataType:'json'
+    }).done(function(resp){
+        var cadena="";
+        if(resp && resp.length > 0){
+            for(var i=0; i<resp.length; i++){
+                cadena+="<option value='"+resp[i].id_rol+"'>"+resp[i].nombre_rol+"</option>";
+        }
+        $("#cmb_rol").html(cadena);
+        $("#cmb_rol_editar").html(cadena);
+    }else{
+        cadena+="<option value=''>NO SE ENCONTRARON REGISTROS</option>";
+        $("#cmb_rol").html(cadena);
+        $("#cmb_rol_editar").html(cadena);
+    }
+    }).fail(function(jqXHR, textStatus, errorThrown){
+        console.error("Error al cargar roles: ", textStatus, errorThrown, jqXHR.responseText);
+    })
+
 }
