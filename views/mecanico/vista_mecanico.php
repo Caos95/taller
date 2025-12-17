@@ -56,15 +56,19 @@
                 <div class="modal-body">
                     <div class="col-lg-6">
                         <label for="">Usuario</label>
-                        <input type="text" class="form-control" id="txr_usu" placeholder="Ingrese usuario"><br>
+                        <input type="text" class="form-control" id="txr_usu" placeholder="Ingrese nombre de usuario"><br>
                     </div>
                     <div class="col-lg-6">
                         <label for="">Rut</label>
-                        <input type="text" class="form-control" id="txr_rut" placeholder="Ingrese usuario"><br>
+                        <input type="text" class="form-control" id="txr_rut" placeholder="Ingrese Rut"><br>
                     </div>
                     <div class="col-lg-6">
-                        <label for="">Nombre</label>
-                        <input type="text" class="form-control" id="txr_nombre" placeholder="Ingrese usuario"><br>
+                        <label for="">Nombres</label>
+                        <input type="text" class="form-control" id="txr_nombre" placeholder="Ingrese sus nombres"><br>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="">Apellidos</label>
+                        <input type="text" class="form-control" id="txr_apellido" placeholder="Ingrese sus apellidos"><br>
                     </div>
                     <div class="col-lg-6">
                         <label for="">Email</label>
@@ -74,11 +78,11 @@
                     </div>
                     <div class="col-lg-6">
                         <label for="">Especialidad</label>
-                        <input type="text" class="form-control" id="txr_especialidad" placeholder="Ingrese usuario"><br>
+                        <input type="text" class="form-control" id="txr_especialidad" placeholder="Ingrese su Especialidad"><br>
                     </div>
                     <div class="col-lg-6">
                         <label for="">Telefono</label>
-                        <input type="text" class="form-control" id="txr_telefono" placeholder="Ingrese usuario"><br>
+                        <input type="text" class="form-control" id="txr_telefono" placeholder="Ingrese numero de telefono 9xxxxxxxx"><br>
                     </div>
                     <div class="col-lg-6">
                         <label for="">Contrase&ntilde;a</label>
