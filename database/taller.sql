@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2025 a las 22:00:29
+-- Tiempo de generación: 17-12-2025 a las 22:10:05
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -51,6 +51,12 @@ nombre_rol
 from rol
 where nombre_rol = 'administrador';
 end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_COMBO_MECANICO` ()   BEGIN
+SELECT r.nombre_rol 
+FROM rol AS r
+where r.nombre_rol = 'Mecanico';
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_COMBO_ROL` ()   BEGIN
     -- Selecciona los roles que están activos (donde estado = 1)
