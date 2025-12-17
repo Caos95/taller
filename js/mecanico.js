@@ -98,3 +98,21 @@ function listar_combo_taller(){
         console.error("Error al cargar talleres: ", textStatus, errorThrown, jqXHR.responseText);
     })
 }
+
+function registrar_Mecanico(){
+    var usuario = $("#txr_usu").val();
+    var rut = $("#txr_rut").val();
+    var nombre = $("#txr_nombre").val();
+    var apellido = $("#txr_apellido").val();
+    var especialidad = $("#txr_especialidad").val();
+    var telefono = $("#txr_telefono").val();
+    var contra = $("#txr_con1").val();
+    var contra2 = $("#txr_con2").val();
+    var sexo = $("#cbm_sexo").val();
+    var taller = $("#cmb_taller").val();
+    var estado = "1";
+}
+
+function listar_combo_mecanico(){
+    
+}
