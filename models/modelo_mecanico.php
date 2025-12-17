@@ -88,6 +88,25 @@ class modelo_Mecanico
             return 0;
         }
     }
+
+    public function listar_combo_mecanico()
+    {
+        $sql = "CALL SP_LISTAR_COMBO_MECANICO()";
+        $stmt = $this->conexion->conexion->prepare($sql);
+        if ($stmt === false) {
+            return [];
+        }
+        $arreglo = array();
+        if ($stmt->execute()) {
+            $resultado = $stmt->get_result();
+            while($datos = $resultado->fetch_assoc()) {
+                $arreglo[] = $datos;
+            }
+        }
+        $stmt->close();
+        return $arreglo;
+
+    }
 }
 
 ?>
