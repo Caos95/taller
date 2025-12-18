@@ -74,8 +74,8 @@
                         <div class="col-lg-6 form-group">
                             <label for="">Email</label>
                             <input type="text" class="form-control" id="txr_email" placeholder="Ingrese email">
-                            <label for="" id="emailOK" style="color:red;"></label>
-                            <input type="text" id="validar_email" hidden>
+                            <!-- El &nbsp; reserva el espacio. El color se controla por JS para hacerlo visible/invisible. -->
+                            <span id="emailOK" class="help-block" style="color: transparent;">&nbsp;</span>
                         </div>
                         <div class="col-lg-6 form-group">
                             <label for="">Especialidad</label>
@@ -124,9 +124,15 @@
         </div>
     </div>
 </form>
+
 <style>
+    /*
+     * Se establece una altura mínima para los .form-group dentro del modal de registro.
+     * Esto asegura que todos los campos tengan el mismo alto, evitando que el layout
+     * se "descuadre" o "salte" cuando aparecen mensajes de validación (como el del email).
+     */
     #modal_registro .form-group {
-        min-height: 80px; /* Ajusta esta altura si es necesario */
+        min-height: 95px;
     }
 </style>
 
@@ -143,16 +149,20 @@ $(document).ready(function () {
 
     });
     document.getElementById('txr_email').addEventListener('input', function () {
-        campo = event.target;//asdsadsa
-        emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-        if (emailRegex.test(campo.value)) {
+        let campo = event.target;
+        let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        
+        // Si el campo está vacío, lo reseteamos a su estado original.
+        if (campo.value.trim() === '') {
             $(this).css("border", "");
-            $("#emailOK").html("");
-            $("#validar_email").val("correcto");
+            $("#emailOK").html("&nbsp;").css("color", "transparent");
+        // Si el email es válido, quitamos el error.
+        } else if (emailRegex.test(campo.value)) {
+            $(this).css("border", "");
+            $("#emailOK").html("&nbsp;").css("color", "transparent");
         } else {
             $(this).css("border", "1px solid red");
-            $("#emailOK").html("Email Incorrecto");
-            $("#validar_email").val("incorrecto");
+            $("#emailOK").html("Email Incorrecto").css("color", "red");
         }
 
     });
