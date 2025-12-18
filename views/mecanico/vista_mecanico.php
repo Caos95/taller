@@ -54,62 +54,64 @@
                     <h4 class="modal-title"><b>Registro De Mecanico</b></h4>
                 </div>
                 <div class="modal-body">
-                    <div class="col-lg-6">
-                        <label for="">Usuario</label>
-                        <input type="text" class="form-control" id="txr_usu" placeholder="Ingrese nombre de usuario"><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Rut</label>
-                        <input type="text" class="form-control" id="txr_rut" placeholder="Ingrese Rut"><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Nombres</label>
-                        <input type="text" class="form-control" id="txr_nombre" placeholder="Ingrese sus nombres"><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Apellidos</label>
-                        <input type="text" class="form-control" id="txr_apellido" placeholder="Ingrese sus apellidos"><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Email</label>
-                        <input type="text" class="form-control" id="txr_email" placeholder="Ingrese email">
-                        <label for="" id="emailOK" style="color:red;"></label>
-                        <input type="text" id="validar_email" hidden>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Especialidad</label>
-                        <input type="text" class="form-control" id="txr_especialidad" placeholder="Ingrese su Especialidad"><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Telefono</label>
-                        <input type="text" class="form-control" id="txr_telefono" placeholder="Ingrese numero de telefono 9xxxxxxxx"><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Contrase&ntilde;a</label>
-                        <input type="password" class="form-control" id="txr_con1"
-                            placeholder="Ingrese contrase&ntilde;a"><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Repita la Contrase&ntilde;a</label>
-                        <input type="password" class="form-control" id="txr_con2"
-                            placeholder="Repita contrase&ntilde;a"><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Sexo</label>
-                        <select class="js-example-basic-single" name="state" id="cbm_sexo" style="width:100%;">
-                            <option value="M">MASCULINO</option>
-                            <option value="F">FEMENINO</option>
-                        </select><br><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Taller</label>
-                        <select class="js-example-basic-single" name="state" id="cmb_taller" style="width:100%;">
-                        </select><br><br>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Rol</label>
-                        <select class="js-example-basic-single" name="state" id="cmb_rol" style="width:100%;">
-                        </select><br><br>
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="">Usuario</label>
+                            <input type="text" class="form-control" id="txr_usu" placeholder="Ingrese nombre de usuario">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Rut</label>
+                            <input type="text" class="form-control" id="txr_rut" placeholder="Ingrese Rut">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Nombres</label>
+                            <input type="text" class="form-control" id="txr_nombre" placeholder="Ingrese sus nombres">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Apellidos</label>
+                            <input type="text" class="form-control" id="txr_apellido" placeholder="Ingrese sus apellidos">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Email</label>
+                            <input type="text" class="form-control" id="txr_email" placeholder="Ingrese email">
+                            <label for="" id="emailOK" style="color:red;"></label>
+                            <input type="text" id="validar_email" hidden>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Especialidad</label>
+                            <input type="text" class="form-control" id="txr_especialidad" placeholder="Ingrese su Especialidad">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Telefono</label>
+                            <input type="text" class="form-control" id="txr_telefono" placeholder="Ingrese numero de telefono 9xxxxxxxx">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Contrase&ntilde;a</label>
+                            <input type="password" class="form-control" id="txr_con1"
+                                placeholder="Ingrese contrase&ntilde;a">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Repita la Contrase&ntilde;a</label>
+                            <input type="password" class="form-control" id="txr_con2"
+                                placeholder="Repita contrase&ntilde;a">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Sexo</label>
+                            <select class="js-example-basic-single" name="state" id="cbm_sexo" style="width:100%;">
+                                <option value="M">MASCULINO</option>
+                                <option value="F">FEMENINO</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Taller</label>
+                            <select class="js-example-basic-single" name="state" id="cmb_taller" style="width:100%;">
+                            </select>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Rol</label>
+                            <select class="js-example-basic-single" name="state" id="cmb_rol" style="width:100%;">
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -122,6 +124,12 @@
         </div>
     </div>
 </form>
+<style>
+    #modal_registro .form-group {
+        min-height: 80px; /* Ajusta esta altura si es necesario */
+    }
+</style>
+
 <script>
 
 $(document).ready(function () {
