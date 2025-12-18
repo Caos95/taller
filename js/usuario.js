@@ -160,7 +160,16 @@ function AbrirModalRegistro(){
     $("#modal_registro").modal({backdrop:'static',keyboard:false})
     $("#modal_registro").modal('show');
     $("#txt_usu").val("");
-    $("#txt_rut").val("");
+    $("#txt_rut").val(""); // Limpia el campo RUT
+    $("#txt_email").val(""); // Limpia el campo email
+    $("#txt_nombre").val(""); // Limpia el campo nombre
+    $("#txt_apellido").val(""); // Limpia el campo apellido
+    $("#txt_telefono").val(""); // Limpia el campo teléfono
+    $("#txt_con1").val(""); // Limpia el campo contraseña
+    $("#txt_con2").val(""); // Limpia el campo de repetir contraseña
+    // Resetea los estilos de validación que pudieran haber quedado
+    $("#txt_email").css("border", "");
+    $("#emailOK").html("&nbsp;").css("color", "transparent");
 }
 
 function agregar_usuario() {
@@ -297,6 +306,18 @@ $('#tabla_usuario').on('click','.editar',function(){
         }
     }).fail(function() {
         Swal.fire("Error de Conexión", "No se pudo comunicar con el servidor para obtener los datos.", "error");
+    });
+});
+
+// Solución: Limpiar modales al cerrarse
+// Se escucha el evento 'hidden.bs.modal' que se dispara cuando un modal se ha cerrado.
+$(document).ready(function() {
+    $('#modal_registro').on('hidden.bs.modal', function () {
+        $(this).find('form')[0].reset(); // Resetea el formulario dentro del modal de registro
+    });
+
+    $('#modal_editar').on('hidden.bs.modal', function () {
+        $(this).find('form')[0].reset(); // Resetea el formulario dentro del modal de edición
     });
 });
 
