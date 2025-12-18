@@ -55,53 +55,53 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">Usuario</label>
-                            <input type="text" class="form-control" id="txt_usu" placeholder="Ingrese usuario"><br>
+                            <input type="text" class="form-control" id="txt_usu" placeholder="Ingrese usuario">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">RUT</label>
-                            <input type="text" class="form-control" id="txt_rut" placeholder="Ingrese RUT"><br>
+                            <input type="text" class="form-control" id="txt_rut" placeholder="Ingrese RUT">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">Nombres</label>
-                            <input type="text" class="form-control" id="txt_nombre" placeholder="Ingrese nombre(s)"><br>
+                            <input type="text" class="form-control" id="txt_nombre" placeholder="Ingrese nombre(s)">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">Apellidos</label>
-                            <input type="text" class="form-control" id="txt_apellido" placeholder="Ingrese apellidos"><br>
+                            <input type="text" class="form-control" id="txt_apellido" placeholder="Ingrese apellidos">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">Email</label>
                             <input type="text" class="form-control" id="txt_email" placeholder="Ingrese email">
                             <label for="" id="emailOK" style="color:red;"></label>
                             <input type="text" id="validar_email" hidden>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">Teléfono</label>
-                            <input type="text" class="form-control" id="txt_telefono" placeholder="Ingrese teléfono"><br>
+                            <input type="text" class="form-control" id="txt_telefono" placeholder="Ingrese teléfono">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">Contrase&ntilde;a</label>
                             <input type="password" class="form-control" id="txt_con1"
-                                placeholder="Ingrese contrase&ntilde;a"><br>
+                                placeholder="Ingrese contrase&ntilde;a">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">Repita la Contrase&ntilde;a</label>
                             <input type="password" class="form-control" id="txt_con2"
-                                placeholder="Repita contrase&ntilde;a"><br>
+                                placeholder="Repita contrase&ntilde;a">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">Sexo</label>
                             <select class="js-example-basic-single" name="state" id="cbm_sexo" style="width:100%;">
                                 <option value="M">MASCULINO</option>
                                 <option value="F">FEMENINO</option>
-                            </select><br><br>
+                            </select>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-group">
                             <label for="">Rol</label>
                             <select class="js-example-basic-single" name="state" id="cbm_rol" style="width:100%;">
-                            </select><br><br>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -179,6 +179,12 @@
         </div>
     </div>
 </form>
+
+<style>
+    #modal_registro .form-group {
+        min-height: 80px; /* Ajusta esta altura si es necesario */
+    }
+</style>
 
 <script>
 
