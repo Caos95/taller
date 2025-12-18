@@ -105,6 +105,7 @@ function registrar_Mecanico(){
     var nombre = $("#txr_nombre").val();
     var apellido = $("#txr_apellido").val();
     var especialidad = $("#txr_especialidad").val();
+    var email = $("#txr_email").val();gi
     var telefono = $("#txr_telefono").val();
     var contra = $("#txr_con1").val();
     var contra2 = $("#txr_con2").val();
@@ -112,6 +113,15 @@ function registrar_Mecanico(){
     var taller = $("#cmb_taller").val();
     var rol = $("#cmb_rol").val();
     var estado = "1";
+
+    if (usuario.length == 0 || contra.length == 0 || contra2.length == 0 || nombre.length == 0 || apellido.length == 0 || rut.length == 0 || email.length == 0 || telefono.length == 0 || sexo.length == 0 || rol.length == 0) {
+        return Swal.fire("Mensaje de Advertencia", "Por favor, complete todos los campos.", "warning");
+    }
+
+    if (contra !== contra2) {
+        return Swal.fire("Mensaje de Advertencia", "Las contraseñas no coinciden.", "warning");
+    }
+
 }
 
 function listar_combo_mecanico(){
