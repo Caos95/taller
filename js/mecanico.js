@@ -105,7 +105,7 @@ function registrar_Mecanico(){
     var nombre = $("#txr_nombre").val();
     var apellido = $("#txr_apellido").val();
     var especialidad = $("#txr_especialidad").val();
-    var email = $("#txr_email").val();gi
+    var email = $("#txr_email").val();
     var telefono = $("#txr_telefono").val();
     var contra = $("#txr_con1").val();
     var contra2 = $("#txr_con2").val();
@@ -122,11 +122,44 @@ function registrar_Mecanico(){
         return Swal.fire("Mensaje de Advertencia", "Las contraseñas no coinciden.", "warning");
     }
 
+    $.ajax({
+        url: "../controllers/mecanico/controlador_registrar_mecanico.php",
+        type: 'POST',
+        data:{
+            usuario: usuario,
+            contra: contra,
+            estado: estado,
+            nombre: nombre,
+            apellido: apellido,
+            rut: rut,
+            email: email,
+            telefono: telefono,
+            sexo: sexo,
+            rol: rol,
+            especialidad: especialidad,
+            taller: taller
+        }
+    }).done(function(resp){
+        if(resp > 0){
+            if(resp == 1){
+                $("#modal_registro").modal('hide');
+                Swal.fire("Mensaje de Confirmación", "Nuevo usuario registrado exitosamente.", "success")
+                .then((value) => {
+                    tablemec.ajax.reload();
+                });
+            }else{
+                let mensaje = resp == 2 ? "El nombre de usuario ya existe." : (resp == 3 ? "El RUT ya existe." : "El email ya existe.");
+                Swal.fire("Mensaje de Advertencia", mensaje, "warning");    
+            }
+        } else{
+                Swal.fire("Mensaje de Error", "No se pudo completar el registro.", "error");
+        }
+    });
 }
 
 function listar_combo_mecanico(){
     $.ajax({
-        url:"../controllers/mecanico/controlador_combo_mecanico.php",
+        url:"../controllers/mecanico/controlador_listar_cmb_mecanico.php",
         type:'POST',
         dataType:'json'
     }).done(function(resp){
