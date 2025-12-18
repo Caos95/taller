@@ -74,8 +74,8 @@
                         <div class="col-lg-6 form-group">
                             <label for="">Email</label>
                             <input type="text" class="form-control" id="txt_email" placeholder="Ingrese email">
-                            <label for="" id="emailOK" style="color:red;"></label>
-                            <input type="text" id="validar_email" hidden>
+                            <!-- Estandarizamos el mensaje de error del email para evitar saltos en el layout -->
+                            <span id="emailOK" class="help-block" style="color: transparent;">&nbsp;</span>
                         </div>
                         <div class="col-lg-6 form-group">
                             <label for="">Teléfono</label>
@@ -128,46 +128,46 @@
             <div class="modal-body">
                 <div class="row">
                     <input type="text" id="txtidusuario" hidden>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 form-group">
                         <label for="">Usuario</label>
-                        <input type="text" class="form-control" id="txtusu_editar" placeholder="Ingrese usuario" disabled><br>
+                        <input type="text" class="form-control" id="txtusu_editar" placeholder="Ingrese usuario" disabled>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 form-group">
                         <label for="">RUT</label>
-                        <input type="text" class="form-control" id="txt_rut_editar" placeholder="Ingrese RUT" disabled><br>
+                        <input type="text" class="form-control" id="txt_rut_editar" placeholder="Ingrese RUT" disabled>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 form-group">
                         <label for="">Nombres</label>
-                        <input type="text" class="form-control" id="txt_nombre_editar" placeholder="Ingrese nombre(s)"><br>
+                        <input type="text" class="form-control" id="txt_nombre_editar" placeholder="Ingrese nombre(s)">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 form-group">
                         <label for="">Apellidos</label>
-                        <input type="text" class="form-control" id="txt_apellido_editar" placeholder="Ingrese apellidos"><br>
+                        <input type="text" class="form-control" id="txt_apellido_editar" placeholder="Ingrese apellidos">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 form-group">
                         <label for="">Email</label>
                         <input type="text" class="form-control" id="txt_email_editar" placeholder="Ingrese email">
-                        <label for="" id="emailOK_editar" style="color:red;"></label>
-                        <input type="text" id="validar_email_editar" hidden>
+                        <!-- Estandarizamos el mensaje de error del email para evitar saltos en el layout -->
+                        <span id="emailOK_editar" class="help-block" style="color: transparent;">&nbsp;</span>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 form-group">
                         <label for="">Teléfono</label>
-                        <input type="text" class="form-control" id="txt_telefono_editar" placeholder="Ingrese teléfono"><br>
+                        <input type="text" class="form-control" id="txt_telefono_editar" placeholder="Ingrese teléfono">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 form-group">
                         <label for="">Contrase&ntilde;a (Opcional)</label>
-                        <input type="password" class="form-control" id="txt_con1_editar" placeholder="Dejar en blanco para no modificar"><br>
+                        <input type="password" class="form-control" id="txt_con1_editar" placeholder="Dejar en blanco para no modificar">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 form-group">
                         <label for="">Repita la Contrase&ntilde;a</label>
-                        <input type="password" class="form-control" id="txt_con2_editar" placeholder="Repita contrase&ntilde;a"><br>
+                        <input type="password" class="form-control" id="txt_con2_editar" placeholder="Repita contrase&ntilde;a">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 form-group">
                         <label for="">Sexo</label>
                         <select class="js-example-basic-single" name="state" id="cbm_sexo_editar" style="width:100%;">
                             <option value="M">MASCULINO</option>
                             <option value="F">FEMENINO</option>
-                        </select><br><br>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -181,8 +181,12 @@
 </form>
 
 <style>
-    #modal_registro .form-group {
-        min-height: 80px; /* Ajusta esta altura si es necesario */
+    /*
+     * Se establece una altura mínima para los .form-group en ambos modales (registro y edición).
+     * Esto asegura que todos los campos tengan el mismo alto y evita que el layout se descuadre.
+     */
+    #modal_registro .form-group, #modal_editar .form-group {
+        min-height: 95px;
     }
 </style>
 
@@ -208,31 +212,32 @@ $(document).ready(function () {
     })
 
     document.getElementById('txt_email').addEventListener('input', function () {
-        campo = event.target;//asdsadsa
-        emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;//asdasd21321@gmail.com
-        if (emailRegex.test(campo.value)) {
+        let campo = event.target;
+        let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        if (campo.value.trim() === '') {
             $(this).css("border", "");
-            $("#emailOK").html("");
-            $("#validar_email").val("correcto");
+            $("#emailOK").html("&nbsp;").css("color", "transparent");
+        } else if (emailRegex.test(campo.value)) {
+            $(this).css("border", "");
+            $("#emailOK").html("&nbsp;").css("color", "transparent");
         } else {
             $(this).css("border", "1px solid red");
-            $("#emailOK").html("Email Incorrecto");
-            $("#validar_email").val("incorrecto");
+            $("#emailOK").html("Email Incorrecto").css("color", "red");
         }
-
     });
 
     document.getElementById('txt_email_editar').addEventListener('input', function () {
-        campo = event.target;
-        emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-        if (emailRegex.test(campo.value)) {
+        let campo = event.target;
+        let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        if (campo.value.trim() === '') {
             $(this).css("border", "");
-            $("#emailOK_editar").html("");
-            $("#validar_email_editar").val("correcto");
+            $("#emailOK_editar").html("&nbsp;").css("color", "transparent");
+        } else if (emailRegex.test(campo.value)) {
+            $(this).css("border", "");
+            $("#emailOK_editar").html("&nbsp;").css("color", "transparent");
         } else {
             $(this).css("border", "1px solid red");
-            $("#emailOK_editar").html("Email Incorrecto");
-            $("#validar_email_editar").val("incorrecto");
+            $("#emailOK_editar").html("Email Incorrecto").css("color", "red");
         }
     });
 
