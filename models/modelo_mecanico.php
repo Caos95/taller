@@ -33,38 +33,26 @@ class modelo_Mecanico
         return $arreglo;
     }
 
-    public function registrar_mecanico_completo($usuario, $contra, $sexo, $rol, $rut, $nombre, $especialidad, $telefono, $email, $taller)
+    public function registrar_mecanico($usuario, $contra, $estado, $nombre, $apellido, $rut, $email, $telefono, $sexo, $rol, $especialidad, $taller)
     {
-        $sql = 'CALL SP_REGISTRAR_MECANICO_COMPLETO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $stmt = $this->conexion->conexion->prepare($sql);
+        $sql = "CALL SP_REGISTRAR_MECANICO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt=$this->conexion->conexion->prepare($sql);
         if ($stmt === false) {
-            // Error en la preparación de la consulta
             return 0;
         }
+        $contrahash = password_hash($contra, PASSWORD_DEFAULT, ['cost' => 10]);
+        $stmt->bind_param("ssisssssiisi",$usuario,$contrahash,$estado,$nombre,$apellido,$rut,$email,$telefono,$sexo,$rol,$especialidad,$taller);
 
-        $contra_hash = password_hash($contra, PASSWORD_DEFAULT, ['cost' => 10]);
-
-        $stmt->bind_param("sssisssssi", $usuario, $contra_hash, $sexo, $rol, $rut, $nombre, $especialidad, $telefono, $email, $taller);
-
-        if ($stmt->execute()) {
-            // Obtener el resultado del SELECT dentro del procedimiento
-            $resultado = $stmt->get_result();
-            if ($fila = $resultado->fetch_assoc()) {
-                $stmt->close();
-                return (int) $fila['resultado']; // Devuelve 1, 2 o 0
-            }
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        if ($fila = $resultado->fetch_assoc()) {
             $stmt->close();
-            return 0; // Error al obtener el resultado del SELECT
+            return (int)$fila['resultado'];
         }
-
-        // Si la ejecución falla o no devuelve resultado
-        $error_code = $this->conexion->conexion->errno;
         $stmt->close();
-        if ($error_code == 1062 || $error_code == 1452) { // Error de entrada duplicada
-            return 2;
-        }
-        return 0; // Error general
+        return 0;
     }
+
 
     public function modificar_estado($id_usuario, $estado)
     {
