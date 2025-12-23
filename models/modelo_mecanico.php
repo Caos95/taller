@@ -41,7 +41,7 @@ class modelo_Mecanico
             return 0;
         }
         $contrahash = password_hash($contra, PASSWORD_DEFAULT, ['cost' => 10]);
-        $stmt->bind_param("ssisssssiisi",$usuario,$contrahash,$estado,$nombre,$apellido,$rut,$email,$telefono,$sexo,$rol,$especialidad,$taller);
+        $stmt->bind_param("ssissssssisi",$usuario,$contrahash,$estado,$nombre,$apellido,$rut,$email,$telefono,$sexo,$rol,$especialidad,$taller);
 
         $stmt->execute();
         $resultado = $stmt->get_result();
