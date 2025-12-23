@@ -53,7 +53,7 @@ where nombre_rol = 'administrador';
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_COMBO_MECANICO` ()   BEGIN
-SELECT r.nombre_rol 
+SELECT r.id_rol, r.nombre_rol 
 FROM rol AS r
 where r.nombre_rol = 'Mecanico';
 END$$
@@ -224,6 +224,77 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REGISTRAR_USUARIO` (IN `p_nombre
             -- Si algo falló (ej. el rol no existe), revertimos todo.
             ROLLBACK;
             SELECT 0 AS resultado; -- 0: Error
+        END IF;
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REGISTRAR_MECANICO`(
+    IN p_nombre_usuario VARCHAR(150),
+    IN p_clave VARCHAR(250),
+    IN p_estado TINYINT,
+    IN p_nombres VARCHAR(150),
+    IN p_apellidos VARCHAR(150),
+    IN p_rut VARCHAR(45),
+    IN p_email VARCHAR(150),
+    IN p_telefono VARCHAR(25),
+    IN p_sexo CHAR(1),
+    IN p_rol_id INT,
+    IN p_especialidad VARCHAR(45),
+    IN p_taller_id INT
+)
+BEGIN
+    DECLARE nuevo_usuario_id INT;
+
+    -- Validaciones de duplicados
+    IF EXISTS (SELECT 1 FROM usuario WHERE nombre_usuario = p_nombre_usuario) THEN
+        SELECT 2 AS resultado; -- 2: Nombre de usuario duplicado
+    ELSEIF EXISTS (SELECT 1 FROM usuario WHERE rut = p_rut) THEN
+        SELECT 3 AS resultado; -- 3: RUT duplicado
+    ELSEIF EXISTS (SELECT 1 FROM usuario WHERE email = p_email) THEN
+        SELECT 4 AS resultado; -- 4: Email duplicado
+    ELSE
+        START TRANSACTION;
+
+        -- 1. Insertar en la tabla usuario
+        INSERT INTO usuario(
+            nombre_usuario, 
+            clave, 
+            estado, 
+            nombres, 
+            apellidos, 
+            rut, 
+            email, 
+            telefono, 
+            sexo, 
+            rol_id_rol
+        ) 
+        VALUES (
+            p_nombre_usuario, 
+            p_clave, 
+            p_estado, 
+            p_nombres, 
+            p_apellidos, 
+            p_rut, 
+            p_email, 
+            p_telefono, 
+            p_sexo, 
+            p_rol_id
+        );
+
+        -- Obtener el ID del usuario recién creado
+        SET nuevo_usuario_id = LAST_INSERT_ID();
+
+        -- 2. Insertar en la tabla mecanico usando el ID recuperado
+        INSERT INTO mecanico(id_mecanico, especialidad, taller_id_taller)
+        VALUES (nuevo_usuario_id, p_especialidad, p_taller_id);
+
+        -- Verificar si se insertó correctamente y confirmar transacción
+        IF ROW_COUNT() > 0 THEN
+            COMMIT;
+            SELECT 1 AS resultado; -- Éxito
+        ELSE
+            ROLLBACK;
+            SELECT 0 AS resultado; -- Error al insertar en mecanico
         END IF;
     END IF;
 END$$
