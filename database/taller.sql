@@ -76,7 +76,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_MECANICO` ()   BEGIN
         u.sexo,
         u.estado,
         r.nombre_rol AS rol_nombre,
-        m.especialidad,
+        e.nombre_especialidad AS especialidad,
         t.nombre_taller
     FROM 
         usuario AS u
@@ -84,6 +84,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_MECANICO` ()   BEGIN
         rol AS r ON u.rol_id_rol = r.id_rol
     INNER JOIN
         mecanico AS m ON u.id_usuario = m.id_mecanico
+    INNER JOIN
+        especialidad AS e ON m.especialidad_id_especialidad = e.id_especialidad
     INNER JOIN 
         taller AS t ON m.taller_id_taller = t.id_taller
     WHERE
@@ -155,7 +157,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_INFO_USUARIO` (IN `p_id_
         CONCAT(u.nombres, ' ', u.apellidos) AS nombre_completo,
         -- Opcional: Mostrar la especialidad si es un Mecánico
         CASE r.nombre_rol
-            WHEN 'Mecanico' THEN m.especialidad
+            WHEN 'Mecanico' THEN e.nombre_especialidad
             ELSE NULL
         END AS especialidad_o_rol_secundario
     FROM
@@ -169,6 +171,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_INFO_USUARIO` (IN `p_id_
         cliente c ON u.id_usuario = c.id_cliente
     LEFT JOIN
         mecanico m ON u.id_usuario = m.id_mecanico
+    LEFT JOIN
+        especialidad e ON m.especialidad_id_especialidad = e.id_especialidad
     LEFT JOIN
         administrador_usuario a ON u.id_usuario = a.id_administrador
     LEFT JOIN
@@ -210,7 +214,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REGISTRAR_USUARIO` (IN `p_nombre
         ELSEIF p_rol_id = 3 THEN
             -- Para el mecánico, asumimos valores por defecto o que se llenarán después.
             -- Si la especialidad es obligatoria, este enfoque debe cambiar.
-            INSERT INTO mecanico (id_mecanico, especialidad, taller_id_taller) VALUES (new_user_id, 'General', 1); -- Asumiendo taller_id=1 como default
+            INSERT INTO mecanico (id_mecanico, especialidad_id_especialidad, taller_id_taller) VALUES (new_user_id, 1, 1); -- Asumiendo taller_id=1 y especialidad_id=1 como default
         ELSEIF p_rol_id = 4 THEN
             INSERT INTO dueno_taller (id_dueno_taller) VALUES (new_user_id);
         END IF;
@@ -239,7 +243,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REGISTRAR_MECANICO`(
     IN p_telefono VARCHAR(25),
     IN p_sexo CHAR(1),
     IN p_rol_id INT,
-    IN p_especialidad VARCHAR(45),
+    IN p_id_especialidad INT,
     IN p_taller_id INT
 )
 BEGIN
@@ -285,8 +289,8 @@ BEGIN
         SET nuevo_usuario_id = LAST_INSERT_ID();
 
         -- 2. Insertar en la tabla mecanico usando el ID recuperado
-        INSERT INTO mecanico(id_mecanico, especialidad, taller_id_taller)
-        VALUES (nuevo_usuario_id, p_especialidad, p_taller_id);
+        INSERT INTO mecanico(id_mecanico, especialidad_id_especialidad, taller_id_taller)
+        VALUES (nuevo_usuario_id, p_id_especialidad, p_taller_id);
 
         -- Verificar si se insertó correctamente y confirmar transacción
         IF ROW_COUNT() > 0 THEN
@@ -367,6 +371,24 @@ INSERT INTO `dueno_taller` (`id_dueno_taller`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `especialidad`
+--
+
+CREATE TABLE `especialidad` (
+  `id_especialidad` int(11) NOT NULL,
+  `nombre_especialidad` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `especialidad`
+--
+
+INSERT INTO `especialidad` (`id_especialidad`, `nombre_especialidad`) VALUES
+(1, 'General');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `historial`
 --
 
@@ -386,7 +408,7 @@ CREATE TABLE `historial` (
 
 CREATE TABLE `mecanico` (
   `id_mecanico` int(11) NOT NULL,
-  `especialidad` varchar(45) NOT NULL,
+  `especialidad_id_especialidad` int(11) NOT NULL,
   `taller_id_taller` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -530,10 +552,17 @@ ALTER TABLE `historial`
   ADD KEY `fk_historial_vehiculo1_idx` (`vehiculo_id_vehiculo`);
 
 --
+-- Indices de la tabla `especialidad`
+--
+ALTER TABLE `especialidad`
+  ADD PRIMARY KEY (`id_especialidad`);
+
+--
 -- Indices de la tabla `mecanico`
 --
 ALTER TABLE `mecanico`
   ADD PRIMARY KEY (`id_mecanico`),
+  ADD KEY `fk_mecanico_especialidad_idx` (`especialidad_id_especialidad`),
   ADD KEY `fk_mecanico_usuario1_idx` (`id_mecanico`),
   ADD KEY `fk_mecanico_taller1_idx` (`taller_id_taller`);
 
@@ -586,6 +615,12 @@ ALTER TABLE `vehiculo`
 --
 ALTER TABLE `historial`
   MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `especialidad`
+--
+ALTER TABLE `especialidad`
+  MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -650,6 +685,7 @@ ALTER TABLE `historial`
 -- Filtros para la tabla `mecanico`
 --
 ALTER TABLE `mecanico`
+  ADD CONSTRAINT `fk_mecanico_especialidad` FOREIGN KEY (`especialidad_id_especialidad`) REFERENCES `especialidad` (`id_especialidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_mecanico_taller1` FOREIGN KEY (`taller_id_taller`) REFERENCES `taller` (`id_taller`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_mecanico_usuario1` FOREIGN KEY (`id_mecanico`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
